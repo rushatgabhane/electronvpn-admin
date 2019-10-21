@@ -1,12 +1,14 @@
 "use strict";
 const express = require('express'),
-      router = express.Router();
+      router = express.Router(),
+      User = require('../models/user');
 
 // @route  GET admin/users
-// @desc   Get info of all users
+// @desc   Get info of all users, with filter(search) functionality
 // @access Private (Admin only)
 router.get('/', (req, res) => {
-    res.send('admin get users');
+    console.log(User.find(), typeof User.find());
+    res.send('get all users');
 });
 
 // @route  POST admin/users/adduser

@@ -3,7 +3,7 @@ const express = require('express'),
       router = express.Router();
 
 // @route  GET admin/dashboard
-// @desc   Access to admin functions
+// @desc   A place for various admin functions, user metrics and nice graphs
 // @access Private (Admin users)
 router.get('/', (req, res) => {
     res.send('admin dashboard');
