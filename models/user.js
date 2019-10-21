@@ -24,7 +24,8 @@ const UserSchema = new mongoose.Schema({
     dataused: String,
     amountpaid: String,
     resetPasswordToken: String,
-    resetPasswordExpires: Date
+    resetPasswordExpires: Date,
+    admin: String
 });
 
 UserSchema.plugin(passportLocalMongoose);

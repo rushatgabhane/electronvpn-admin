@@ -14,7 +14,7 @@ require('dotenv').config({
     path: '.env'
 });
 
-const hostname = 'localhost' ;
+const hostname = 'localhost';
 const port = 3001;
 const electronServer1 = '10.139.63.22:20555';
 
