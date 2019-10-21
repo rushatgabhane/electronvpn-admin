@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+    <script async>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-132119001-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/css/signup.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+	<link rel="manifest" href="/images/site.webmanifest">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/images/favicon.ico">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="msapplication-config" content="/images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="robots" content="noindex">
+</head>
+<body>
+    <section class ="hero" id="vanta">
+        <div class="flex-container center margin-top-50">
+                <h1 id="title">Admin Login</h1>
+            <form action="/admin/login" method="POST">
+                <div class="error">
+                    <p><%=locals.error%></p>
+                </div>
+                <%if(locals.message != '') {%>
+                    <div class="message">
+                        <p><%=locals.message%></p>
+                    </div>
+                <% } %>
+                <div class="col">
+                    <input type="phone" name="username" placeholder="Phone" required><br>
+                </div>
+                <div class="col">
+                    <input type="password" name="password" placeholder="Password" required><br>
+                </div>
+                <div class="forgot-password">
+                    <a href="/forgot" class="forgot-password">Forgot Password?</a>
+                </div>
+                <input type="submit" value="Sign In">
+            </form>
+        </div>
+    </section>
+    <div class="desktop-only-scripts">
+        <script src="/scripts/index.js"></script>
+    </div>
+</body>
+</html>
