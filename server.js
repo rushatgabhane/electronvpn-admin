@@ -30,9 +30,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Define Routes
+// @desc default nginx config: electronvpn.com/admin
+app.use('/', require('./routes/index')); // nginx default path 
 app.use('/login', require('./routes/login'));
-app.use('/dashboard', require('./routes/dashboard'));
+app.use('/dashboard', require('./routes/dashboard')); 
 app.use('/users', require('./routes/users'));
+
+app.get('*', (req, res) => {
+	res.status(404).render('404');
+});
 
 app.listen(port, hostname, () => {
     console.log(`Admin server started... on port ${port}`);

@@ -2,7 +2,7 @@
 const express = require('express'),
       router = express.Router();
 
-// @route    GET admin/login
+// @route    GET /login
 // @desc     Authentication page for admin
 // @access   Public
 router.get('/', (req, res) => {

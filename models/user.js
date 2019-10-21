@@ -6,6 +6,7 @@ mongoose.connect(mongoDB, { useNewUrlParser: true });
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 
 const UserSchema = new mongoose.Schema({
     name: String,
