@@ -1,39 +1,39 @@
-"use strict";
-const express = require('express');
-const app = express();
-const flash = require('express-flash');
-const bodyParser = require('body-parser');
-const passport = require('passport');
-const User = require('./models/user');
-const request = require('request');
-const async = require('async');
-const crypto = require('crypto');
-const fs = require('fs');
+'use strict';
+const express               = require('express'),
+	  app                   = express(),
+	  flash                 = require('express-flash'),
+ 	  bodyParser            = require('body-parser'),
+ 	  passport              = require('passport'),
+ 	  User                  = require('./models/user'),
+ 	  request               = require('request'),
+ 	  async 				= require('async'),
+ 	  crypto                = require('crypto'),
+ 	  fs                    = require('fs');
 
-require('dotenv').config({
-    path: '.env'
-});
+// require('dotenv').config({path: '.env'});
 
 const hostname = 'localhost';
 const port = 3001;
-const electronServer1 = '10.139.63.22:20555';
+const electronServer1Ip = '10.139.63.22:20555';
 
 app.set('view engine', 'ejs');
 app.use(flash());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static('../public'));
+app.use(express.static('./public'));
 
-app.use(require('express-session')({
-	secret: 'glass pixel bighelicon dumtemple bell audi otechnishas asdas',
-	resave: false,
-	saveUninitialized: false
-}));
+// app.use(require('express-session')({
+// 	secret: 'glass pixel bighelicon dumtemple bell audi otechnishas asdas',
+// 	resave: false,
+// 	saveUninitialized: false
+// }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Imports routes
-require('./routes/routes')(app);
+// Define Routes
+app.use('/admin/login', require('./routes/login'));
+app.use('/admin/dashboard', require('./routes/dashboard'));
+app.use('/admin/users', require('./routes/users'));
 
 app.listen(port, hostname, () => {
     console.log(`Admin server started... on port ${port}`);
