@@ -8,7 +8,7 @@ const express = require('express'),
 // @access Private (Admin only)
 router.get('/', (req, res) => {
     User.find({}, (err, user) => {
-        console.log(user);
+        console.log(user.username);
     });
     res.send('get all users');
 });
