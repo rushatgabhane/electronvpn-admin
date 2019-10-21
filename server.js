@@ -7,7 +7,6 @@ const express               = require('express'),
  	  User                  = require('./models/user'),
  	  request               = require('request'),
  	  async 				= require('async'),
- 	  crypto                = require('crypto'),
  	  fs                    = require('fs');
 
 require('dotenv').config({path: '.env'});
@@ -31,9 +30,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Define Routes
-app.use('/admin/login', require('./routes/login'));
-app.use('/admin/dashboard', require('./routes/dashboard'));
-app.use('/admin/users', require('./routes/users'));
+app.use('/login', require('./routes/login'));
+app.use('/dashboard', require('./routes/dashboard'));
+app.use('/users', require('./routes/users'));
 
 app.listen(port, hostname, () => {
     console.log(`Admin server started... on port ${port}`);
