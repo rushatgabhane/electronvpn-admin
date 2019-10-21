@@ -7,7 +7,9 @@ const express = require('express'),
 // @desc   Get info of all users, with filter(search) functionality
 // @access Private (Admin only)
 router.get('/', (req, res) => {
-    console.log(User.find({}));
+    User.find({}, (err, user) => {
+        console.log(user);
+    });
     res.send('get all users');
 });
 
