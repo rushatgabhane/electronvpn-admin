@@ -10,7 +10,7 @@ const express               = require('express'),
  	  crypto                = require('crypto'),
  	  fs                    = require('fs');
 
-// require('dotenv').config({path: '.env'});
+require('dotenv').config({path: '.env'});
 
 const hostname = 'localhost';
 const port = 3001;
@@ -21,11 +21,11 @@ app.use(flash());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
-// app.use(require('express-session')({
-// 	secret: 'glass pixel bighelicon dumtemple bell audi otechnishas asdas',
-// 	resave: false,
-// 	saveUninitialized: false
-// }));
+app.use(require('express-session')({
+	secret: 'glass pixel bighelicon dumtemple bell audi otechnishas asdas',
+	resave: false,
+	saveUninitialized: false
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
