@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "debug": "nodemon --inspect server.js"
+    "debug": "nodemon --inspect server.js",
+    "lint": "./node_modules/.bin/eslint server.js"
   },
   "repository": {
     "type": "git",
@@ -31,5 +32,10 @@
     "passport": "^0.4.0",
     "passport-local-mongoose": "^5.0.1",
     "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
   }
 }

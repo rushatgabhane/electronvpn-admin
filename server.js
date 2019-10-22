@@ -20,8 +20,9 @@ app.use(flash());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
+// Use and Require Express Session
 app.use(require('express-session')({
-	secret: 'glass pixel bighelicon dumtemple bell audi otechnishas asdas',
+	secret: process.env.EXPRESS_SESSION_SECRET,
 	resave: false,
 	saveUninitialized: false
 }));
@@ -36,10 +37,13 @@ app.use('/login', require('./routes/login'));
 app.use('/dashboard', require('./routes/dashboard')); 
 app.use('/users', require('./routes/users'));
 
+// @route  GET invalid routes
+// @desc   Display page not found message
+// @access Public
 app.get('*', (req, res) => {
 	res.status(404).render('404');
 });
 
 app.listen(port, hostname, () => {
-    console.log(`Admin server started... on port ${port}`);
+	console.log(`Admin server started... on port ${port}`);
 });
