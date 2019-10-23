@@ -14,10 +14,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Support</title>
+	<title>Support</title>
+	<script async src="/admin/scripts/dashboard.js"></script>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/support.css">
+    <link rel="stylesheet" href="/admin/css/dashboard.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
@@ -34,7 +36,7 @@
     <section>
 		<nav>
 			<div class="logo">
-				<a href="/" id="desktop-logo"><object type="image/svg+xml" data="/images/logo.svg"></object></a>
+				<a href="/" class="bolder" id="desktop-logo">ElectronVPN</a>
 				<a href="/" id="mobile-logo">ElectronVPN</a>
 			</div>
 			<div class="desktop-nav">
@@ -59,52 +61,41 @@
 				</div>
 			</div>
 		</nav>
-	</section>
+    </section>
 	<section class="content">
 		<div id="waves-bg">
 			<div class ="waves-item-4">
                 <h1>Admin Functions</h1>
                 <div class="step">
-                    <h5><a href="/admin/">Add a user</h5>
-                    <h6>Dowload the <strong>windows</strong> app from <a href="/downloads/ElectronVPN.zip" class="blue-link" download="ElectronVPN.zip">here</a>, and unzip the file.</h6>
-                </div>
-                <div class="step">
-                    <h5>Install ElectronVPN Client</h5>
-                    <h6>Install it, like any other software, and leave it open for now. Don't change any settings.</h6>
-                </div>
-                <div class="step">
-                    <h5>Remove all proxy settings, exit proxifier</h5>
-                    <h6>Disable proxy settings in windows and turn off proxifier or any other proxy app.</h6>
-                </div>
-                <div class="step">
-                    <h5>Open Config file</h5>
-                    <h6>Open config file and click "Yes" to import the vpn settings.</h6>
-                    <div class="instruction-image">
-                        <img src="/images/screenshot-config.png">
-                        <img class="next-image" src="/images/screen-config-yes.png">
-                    </div>
-                </div>
-                <div class="step">
-                    <h5>Connect to VPN</h5>
-                    <h6>Right click <strong>Free-Trial</strong> and click connect.</h6>
-                    <div class="instruction-image">
-                        <img src="/images/screen-connect.png">
-                    </div>
-                </div>
-                <div class="step">
-                    <h5>Enter your credentials</h5>
-                    <h6>Use your phone number as username.</h6>
-                </div>
-                <div class="step">
-                    <h5>Success! 🎉</h5>
-                    <h6>Play Steam Games, use developer tools and almost any app, like it's without proxy.</h6>
-                    <h6>Use <strong>LAN</strong> for best performance</h6>
-                </div>
-                <div class="step">
-                    <a class="blue-link "href="/dashboard"><h6 class="blue-link">Go to Dashboard to see Data-usage and Pricing &#x2192;</h6></a>
+					<div onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><h5><a class="items" href="javascript:">Add a user</a></h5></div> 
+					<div id="id01" class="modal"> 
+						<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span> 
+						<form class="modal-content animate" action="/admin/users/adduser" method="POST"> 
+							<div class="container">
+								<h5 class="modal-text">Add User</h5>
+								<input type="text" placeholder="Enter Email" name="email" required> 
+								<input type="password" placeholder="Enter Password" name="password" required>  
+								<button type="submit" class="signupbtn">Add User</button> 
+							</div> 
+						</form> 
+					</div>
+					<div onclick="document.getElementById('id02').style.display='block'" style="width:auto;"><h5><a class="items" href="javascript:">Update a user</a></h5></div> 
+					<div id="id02" class="modal"> 
+						<form class="modal-content animate" action="/admin/users/updateuser" method="POST"> 
+							<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&#x2716;</span> 
+							<div class="container">
+								<h5 class="modal-text">Update User</h5>
+								<input type="text" placeholder="Enter Email" name="email" required> 
+								<input type="password" placeholder="Enter Password" name="password" required>  
+								<button type="submit" class="signupbtn">Update a user</button> 
+							</div> 
+						</form> 
+					</div>
+                    <h5><a class="items" href="/admin/">Delete a user</a></h5>
+                    <h5><a class="items" href="/admin/">Add a user</a></h5>
                 </div>
                 <div class="step padding-top-75">
-                    <h6>For further questions, email ElectronVPN@gmail.com</h6>
+                    <h5>For any questions, email ElectronVPN@gmail.com</h5>
                 </div>
 			</div>
 			<div class="container waves-container waves-item-1">

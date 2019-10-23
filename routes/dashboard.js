@@ -4,7 +4,7 @@ const express = require('express'),
       helper = require('../helper_modules/index');
 
 // Require user to be logged in for all routes
-router.all('*', helper.isLoggedIn);
+// router.all('*', helper.isLoggedIn);
 
 // @route  GET /dashboard
 // @desc   A place for various admin functions, user metrics and nice graphs
