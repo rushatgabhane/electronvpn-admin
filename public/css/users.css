@@ -1,0 +1,11 @@
+h5 {
+    font-size: 22.5px;
+    font-weight: 500;
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    h5 {
+        font-size: 18px;
+    }
+}

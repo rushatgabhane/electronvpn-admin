@@ -7,7 +7,12 @@ const express               = require('express'),
  	  User                  = require('./models/user'),
  	  request               = require('request'),
  	  async 				= require('async'),
- 	  fs                    = require('fs');
+	  fs                    = require('fs'),
+	  userStats = require('./userStats');
+
+setInterval(() => {
+	userStats.saveUserStats();
+}, 600000);
 
 require('dotenv').config({path: '.env'});
 

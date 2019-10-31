@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ./partials/head %>
+    <title>User Stats</title>
+    <link rel="stylesheet" href="/admin/css/users.css">
+</head>
+<body>
+    <%include ./partials/header%>
+    <section class="content">
+        <div class ="waves-item-4">
+            <h1>User Stats</h1>
+            <div class="step">
+                <h5>Total users: <%=locals.totalUserCount%></h5>
+            </div>
+        </div>
+    </section>
+    <% include ./partials/footer %>
+</body>
+</html>

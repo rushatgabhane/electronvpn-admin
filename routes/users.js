@@ -1,7 +1,8 @@
 const express = require('express'),
       router = express.Router(),
       User = require('../models/user'),
-      helper = require('../helper_modules/index');
+      helper = require('../helper_modules/index'),
+      request = require('request');
 
 // @desc Middleware for all routes to require user to be logged in
 router.all('*', helper.isLoggedIn);
@@ -19,11 +20,28 @@ router.get('/', (req, res) => {
     //         res.send(user.username);
     //     });
     // });
-    User.count( (err, count) => {
+
+    User.count( (err, totalUserCount) => {
         if(err) {
             console.log('err');
         }
-        res.send(`We have ${count} users`);
+        request.get(`${process.env.ELECTRON_SERVER1_IP}/statusget/vpn1`, (error, response, body) => {
+            if(error) {
+                console.log(error);
+                return;
+            }
+            let sessionsSubstring = body.substring(body.indexOf('Sessions'), (body.indexOf('\n', body.indexOf('Sessions'))));
+            let currentSessionCount = Number(sessionsSubstring.substring(sessionsSubstring.indexOf('|', '\n')).replace('|', '')) - 1;
+
+            let usersSubstring = body.substring(body.indexOf('Users'), (body.indexOf('\n', body.indexOf('Users'))));
+            let currentUserCount = Number(usersSubstring.substring(usersSubstring.indexOf('|', '\n')).replace('|', '')) - 1;
+            
+            res.render('users', {
+                totalUserCount: totalUserCount,
+                currentUserCount: currentUserCount,
+                currentSessionCount: currentSessionCount
+            });
+        });
     });
 });
 
@@ -31,42 +49,43 @@ router.get('/', (req, res) => {
 // @desc   Add a new user
 // @access Private (Admin only)
 router.post('/adduser', (req, res) => {
-    let electronServerUserAdd = `http://${electronServerIp}/useradd/${phoneNumber}/none/vpn1/${password}`;
-    request.get(electronServerUserAdd, function (error, response, body) {
-        if (response == null) {
-            res.status(500).send("Unable to communicate with ElectronServer whilst adding user");
-        }
-        else if(response.statusCode == 200){
-            console.log("Added to SE database successfully!");
-            // Add to MongoDB
-            User.register(new User({
-                name: req.body.username,
-                phone: phoneNumber,
-                email: email,
-                regno: regNo,
-                exptime: utcTimeAfterThirtyDays.toString(10),
-                data: "50000000000", //in bytes
-                // data: "100000000", // for development 100 mb
-                vpnhub: "vpn1",
-                description: "none",
-                groupname: "none",
-                ispresent: "1",
-                username: phoneNumber, // Phone is the username
-                plainpassword: password, // Plaintext password for re-adding user to ElectronServer
-                collegename: "mnnit",
-                dataused: "0",
-                amountpaid: "0"
-            }), 
-            password, function (err, websiteuser) {
-                if(err){
-                    console.log(err);
-                    return res.send('passport returned erro');
-                }
-                console.log('added user but didn\'t send a mail');
-                res.send('user added!');
-            });
-        }
-    });
+    // let electronServerUserAdd = `http://${electronServerIp}/useradd/${phoneNumber}/none/vpn1/${password}`;
+    // request.get(electronServerUserAdd, function (error, response, body) {
+    //     if (response == null) {
+    //         res.status(500).send("Unable to communicate with ElectronServer whilst adding user");
+    //     }
+    //     else if(response.statusCode == 200){
+    //         console.log("Added to SE database successfully!");
+    //         // Add to MongoDB
+    //         User.register(new User({
+    //             name: req.body.username,
+    //             phone: phoneNumber,
+    //             email: email,
+    //             regno: regNo,
+    //             exptime: utcTimeAfterThirtyDays.toString(10),
+    //             data: "50000000000", //in bytes
+    //             // data: "100000000", // for development 100 mb
+    //             vpnhub: "vpn1",
+    //             description: "none",
+    //             groupname: "none",
+    //             ispresent: "1",
+    //             username: phoneNumber, // Phone is the username
+    //             plainpassword: password, // Plaintext password for re-adding user to ElectronServer
+    //             collegename: "mnnit",
+    //             dataused: "0",
+    //             amountpaid: "0"
+    //         }), 
+    //         password, function (err, websiteuser) {
+    //             if(err){
+    //                 console.log(err);
+    //                 return res.send('passport returned erro');
+    //             }
+    //             console.log('added user but didn\'t send a mail');
+    //             res.send('user added!');
+    //         });
+    //     }
+    // });
+    res.send('add');
 });
 // @route  POST /users/updateuser
 // @desc   Update an existing user
