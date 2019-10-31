@@ -69,14 +69,17 @@
                 <div class="step">
 					<div onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><h5><a class="items" href="javascript:">Add a user</a></h5></div> 
 					<div id="id01" class="modal"> 
-						<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span> 
 						<form class="modal-content animate" action="/admin/users/adduser" method="POST"> 
+							<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&#x2716;</span> 
 							<div class="container">
 								<h5 class="modal-text">Add User</h5>
-								<input type="text" placeholder="Enter Email" name="email" required> 
+								<input type="tel" placeholder="Phone" name="username" required>
+								<input type="password" placeholder="Password" name="password" required>
+								<input type="email" placeholder="Email" name="email" required>
+								<input type="number" placeholder="Data Limit (GB)" name="data" required>
 								<input type="password" placeholder="Enter Password" name="password" required>  
-								<button type="submit" class="signupbtn">Add User</button> 
-							</div> 
+								<button type="submit" class="signupbtn">Add user</button> 
+							</div>
 						</form> 
 					</div>
 					<div onclick="document.getElementById('id02').style.display='block'" style="width:auto;"><h5><a class="items" href="javascript:">Update a user</a></h5></div> 
@@ -87,12 +90,34 @@
 								<h5 class="modal-text">Update User</h5>
 								<input type="text" placeholder="Enter Email" name="email" required> 
 								<input type="password" placeholder="Enter Password" name="password" required>  
-								<button type="submit" class="signupbtn">Update a user</button> 
+								<button type="submit" class="signupbtn">Update user</button> 
 							</div> 
 						</form> 
 					</div>
-                    <h5><a class="items" href="/admin/">Delete a user</a></h5>
-                    <h5><a class="items" href="/admin/">Add a user</a></h5>
+					<div onclick="document.getElementById('id03').style.display='block'" style="width:auto;"><h5><a class="items" href="javascript:">Delete a user</a></h5></div> 
+					<div id="id03" class="modal"> 
+						<form class="modal-content animate" action="/admin/users/deleteuser" method="POST"> 
+							<span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&#x2716;</span> 
+							<div class="container">
+								<h5 class="modal-text">Delete User</h5>
+								<input type="text" placeholder="Enter Email" name="email" required> 
+								<input type="password" placeholder="Enter Password" name="password" required>  
+								<button type="submit" class="signupbtn">Delete user</button> 
+							</div> 
+						</form> 
+					</div>
+					<div onclick="document.getElementById('id04').style.display='block'" style="width:auto;"><h5><a class="items" href="javascript:">Update all users satisfying a condition</a></h5></div> 
+					<div id="id04" class="modal"> 
+						<form class="modal-content animate" action="/admin/users/updateuser" method="POST"> 
+							<span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">&#x2716;</span> 
+							<div class="container">
+								<h5 class="modal-text">Update all</h5>
+								<input type="text" placeholder="Enter Email" name="email" required> 
+								<input type="password" placeholder="Enter Password" name="password" required>  
+								<button type="submit" class="signupbtn">Update all</button> 
+							</div> 
+						</form> 
+					</div>
                 </div>
                 <div class="step padding-top-75">
                     <h5>For any questions, email ElectronVPN@gmail.com</h5>
