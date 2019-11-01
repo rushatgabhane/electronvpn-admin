@@ -12,9 +12,27 @@
             <h1>User Stats</h1>
             <div class="step">
                 <h5>Total users: <%=locals.totalUserCount%></h5>
+                <h5>Current users: <%=locals.currentUserCount%></h5>
+                <h5>Current active sessions: <%=locals.currentSessionCount%></h5>
             </div>
+            <div id="tester" style="width:90%;height:500px;margin-left:5%;"></div>
         </div>
     </section>
     <% include ./partials/footer %>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        TESTER = document.getElementById('tester');
+        var sessionCount = ("<%= locals.sessionCount %>").split(',');
+        var sessionTimeStamp = ("<%= locals.sessionTimeStamp %>").split(',');
+        var xAxis = [];
+        for (let i = 0; i< sessionCount.length; i++ ) {
+            sessionCount[i] = parseInt(sessionCount[i], 10);
+            xAxis[i] = i;
+        }
+        Plotly.plot( TESTER, [{
+        y: sessionCount,
+        x: xAxis }], {
+        margin: { t: 0} } );    
+    </script>
 </body>
 </html>

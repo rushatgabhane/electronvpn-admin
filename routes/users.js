@@ -2,7 +2,8 @@ const express = require('express'),
       router = express.Router(),
       User = require('../models/user'),
       helper = require('../helper_modules/index'),
-      request = require('request');
+      request = require('request'),
+      UserStats = require('../models/userStats');
 
 // @desc Middleware for all routes to require user to be logged in
 router.all('*', helper.isLoggedIn);
@@ -21,11 +22,12 @@ router.get('/', (req, res) => {
     //     });
     // });
 
-    User.count( (err, totalUserCount) => {
+    User.estimatedDocumentCount( (err, totalUserCount) => {
         if(err) {
             console.log('err');
         }
-        request.get(`${process.env.ELECTRON_SERVER1_IP}/statusget/vpn1`, (error, response, body) => {
+        let sessionCount = [], sessionTimeStamp = [];
+        request.get(`${process.env.ELECTRON_SERVER1_IP}/statusget/vpn1`, async (error, response, body) => {
             if(error) {
                 console.log(error);
                 return;
@@ -36,10 +38,24 @@ router.get('/', (req, res) => {
             let usersSubstring = body.substring(body.indexOf('Users'), (body.indexOf('\n', body.indexOf('Users'))));
             let currentUserCount = Number(usersSubstring.substring(usersSubstring.indexOf('|', '\n')).replace('|', '')) - 1;
             
+            try {
+                let doc = await UserStats.findOne({_id: '5dbad4c39b41f2295c65c9b9'});
+                
+                for (let i = 0; i<doc.sessions.length; i++) {
+                   sessionCount.push(doc.sessions[i].count);
+                   sessionTimeStamp.push(new Date(doc.sessions[i].time));
+                }
+            }
+            catch(err) {
+                console.error(err);
+            }
+
             res.render('users', {
                 totalUserCount: totalUserCount,
                 currentUserCount: currentUserCount,
-                currentSessionCount: currentSessionCount
+                currentSessionCount: currentSessionCount,
+                sessionCount: sessionCount,
+                sessionTimeStamp: sessionTimeStamp
             });
         });
     });
